@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "36097078437",
+    "project_id": "home-tutor-88ea5",
+    "storage_bucket": "home-tutor-88ea5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36097078437:android:e92dcf48fe4099c839094c",
+        "android_client_info": {
+          "package_name": "com.example.hometutor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "36097078437-tcje2n9s93t86iml5b4r2slk57rulopp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDIu-ZgaSpVJ_1fejDdQkDi6bP8vQIL7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "36097078437-tcje2n9s93t86iml5b4r2slk57rulopp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
