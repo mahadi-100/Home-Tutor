@@ -35,4 +35,10 @@
     <string name="about_u">Say some words about you</string>
     <string name="add_picture">Add Picture</string>
     <string name="enter">Enter</string>
+    <string name="hint_name">Name</string>
+    <string name="age">Age</string>
+    <string name="Education">Education</string>
+    <string name="Info">Info</string>
+    <string name="bio">Bio</string>
+    <string name="baout">About you</string>
 </resources>

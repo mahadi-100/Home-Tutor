@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -19,7 +20,6 @@ import com.example.hometutor.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.Objects;
@@ -28,14 +28,15 @@ import java.util.UUID;
 import static android.app.Activity.RESULT_OK;
 
 public class PostFragment extends Fragment {
-    private EditText edtFName, edtLName, edtGraduated, edtQualification;
+    private EditText edtName, edtAge, edtGraduate, edtEducation;
     private EditText edtPhone, edtAddress, edtAbout;
+    private ImageView image;
 
     private StorageReference reference;
     FirebaseDatabase database;
     private FirebaseAuth mAuth;
 
-    private Uri imageUri;
+    private Uri imageUri = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,21 +44,19 @@ public class PostFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_post, container, false);
 
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        reference = storage.getReference();
-        database = FirebaseDatabase.getInstance();
-        mAuth = FirebaseAuth.getInstance();
-
-        edtFName = view.findViewById(R.id.post_firstName);
-        edtLName = view.findViewById(R.id.post_lastName);
-        edtGraduated = view.findViewById(R.id.post_graduated);
-        edtQualification = view.findViewById(R.id.post_equalification);
+        edtName= view.findViewById(R.id.post_name);
+        edtAge = view.findViewById(R.id.post_age);
+        edtGraduate = view.findViewById(R.id.post_graduate);
+        edtEducation = view.findViewById(R.id.post_qualification);
         edtPhone = view.findViewById(R.id.post_phone);
-        edtAddress = view.findViewById(R.id.post_address);
-        edtAbout = view.findViewById(R.id.post_someWords);
+        edtAddress= view.findViewById(R.id.post_address);
+        edtAbout = view.findViewById(R.id.post_about);
 
-        Button enter = view.findViewById(R.id.post_btnEnter);
-        enter.setOnClickListener(v->saveInfoToDatabase());
+        image = view.findViewById(R.id.post_image);
+        image.setOnClickListener(v-> addingPicture());
+
+        Button enter = view.findViewById(R.id.post_enter);
+        enter.setOnClickListener(v-> saveInfoToDatabase());
 
         return view;
     }
@@ -75,34 +74,24 @@ public class PostFragment extends Fragment {
 
         if(requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData()!=null){
             imageUri = data.getData();
-            uploadPicture(imageUri);
+            image.setImageURI(imageUri);
         }
     }
 
     private void saveInfoToDatabase() {
-        String firstName = edtFName.getText().toString();
-        String lastName = edtLName.getText().toString();
-        String graduated = edtGraduated.getText().toString();
-        String qualification = edtQualification.getText().toString();
-        String phone = edtPhone.getText().toString();
-        String address = edtAddress.getText().toString();
-        String about = edtAbout.getText().toString();
+        String name = edtName.getText().toString().trim();
 
-        if (firstName.isEmpty() || lastName.isEmpty() || graduated.isEmpty() || qualification.isEmpty() ||
-            phone.isEmpty() || address.isEmpty() || about.isEmpty()){
-            Toast.makeText(getContext(), "empty info field found!", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
-        addingPicture();
         if (imageUri == null){
             return;
+        }else{
+            uploadPicture(imageUri);
         }
 
         DatabaseReference infoReference = database.getReference("Information").
                 child(Objects.requireNonNull(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail()).substring(0,10));
 
-        infoReference.setValue(new InfoClass(firstName, lastName, graduated, qualification, phone, address, about,imageUri.toString()));
+        infoReference.setValue(); //TODO
     }
 
     private void uploadPicture(Uri imageUri) {
