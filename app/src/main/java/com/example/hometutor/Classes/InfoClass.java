@@ -1,40 +1,44 @@
 package com.example.hometutor.Classes;
 
-public class InfoClass{
-    String firstName;
-    String lastName;
-    String graduated;
-    String qualification;
-    String phone;
-    String address;
-    String about;
-    String  uri;
+import android.net.Uri;
 
-    public InfoClass(String firstName, String lastName, String graduated, String qualification, String phone, String address, String about, String uri) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.graduated = graduated;
-        this.qualification = qualification;
+public class InfoClass {
+    private final String name;
+    private final String age;
+    private final String graduate;
+    private final String education;
+    private final String phone;
+    private final String address;
+    private final String about;
+
+    private final Uri imageUri;
+
+    public InfoClass(String name, String age, String graduate, String education,
+                     String phone, String address, String about, Uri imageUri) {
+        this.name = name;
+        this.age = age;
+        this.graduate = graduate;
+        this.education = education;
         this.phone = phone;
         this.address = address;
         this.about = about;
-        this.uri = uri;
+        this.imageUri = imageUri;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getAge() {
+        return age;
     }
 
-    public String getGraduated() {
-        return graduated;
+    public String getGraduate() {
+        return graduate;
     }
 
-    public String getQualification() {
-        return qualification;
+    public String getEducation() {
+        return education;
     }
 
     public String getPhone() {
@@ -49,7 +53,7 @@ public class InfoClass{
         return about;
     }
 
-    public String getUri() {
-        return uri;
+    public Uri getImageUri() {
+        return imageUri;
     }
 }

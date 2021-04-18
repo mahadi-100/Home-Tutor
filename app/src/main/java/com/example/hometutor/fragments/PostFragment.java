@@ -20,6 +20,7 @@ import com.example.hometutor.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.Objects;
@@ -33,8 +34,9 @@ public class PostFragment extends Fragment {
     private ImageView image;
 
     private StorageReference reference;
-    FirebaseDatabase database;
+
     private FirebaseAuth mAuth;
+    FirebaseDatabase database;
 
     private Uri imageUri = null;
 
@@ -43,6 +45,12 @@ public class PostFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_post, container, false);
+
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        reference = storage.getReference();
+
 
         edtName= view.findViewById(R.id.post_name);
         edtAge = view.findViewById(R.id.post_age);
@@ -80,18 +88,30 @@ public class PostFragment extends Fragment {
 
     private void saveInfoToDatabase() {
         String name = edtName.getText().toString().trim();
+        String age = edtAge.getText().toString().trim();
+        String graduate = edtGraduate.getText().toString();
+        String education = edtEducation.getText().toString();
+        String phone = edtPhone.getText().toString();
+        String address = edtAddress.getText().toString();
+        String about = edtAbout.getText().toString();
 
+        if (name.isEmpty() || age.isEmpty() || graduate.isEmpty() || education.isEmpty()
+            || phone.isEmpty() || address.isEmpty() || about.isEmpty()){
+            Toast.makeText(getContext(), "empty input field found", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if (imageUri == null){
+            Toast.makeText(getContext(), "Image not selected", Toast.LENGTH_SHORT).show();
             return;
-        }else{
-            uploadPicture(imageUri);
         }
 
         DatabaseReference infoReference = database.getReference("Information").
                 child(Objects.requireNonNull(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail()).substring(0,10));
 
-        infoReference.setValue(); //TODO
+        infoReference.setValue(new InfoClass(name, age, graduate, education, phone, address, about, imageUri));
+
+        uploadPicture(imageUri);
     }
 
     private void uploadPicture(Uri imageUri) {
@@ -105,12 +125,12 @@ public class PostFragment extends Fragment {
         myRef.putFile(imageUri)
                 .addOnSuccessListener(taskSnapshot -> {
                     dialog.dismiss();
-                    Toast.makeText(getContext(), "Upload Done", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Update Successful", Toast.LENGTH_SHORT).show();
                 })
 
                 .addOnFailureListener(e -> {
                     dialog.dismiss();
-                    Toast.makeText(getContext(), "Upload Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Update Failed", Toast.LENGTH_SHORT).show();
                 })
 
                 .addOnProgressListener(taskSnapshot->{
