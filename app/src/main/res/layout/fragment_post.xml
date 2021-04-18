@@ -23,9 +23,9 @@
             android:background="@drawable/edt"
             android:ems="10"
             android:hint="@string/first_name"
+            android:importantForAutofill="no"
             android:inputType="textPersonName"
-            android:padding="15dp"
-            android:importantForAutofill="no" />
+            android:padding="15dp" />
 
         <EditText
             android:id="@+id/post_lastName"
@@ -37,9 +37,9 @@
             android:background="@drawable/edt"
             android:ems="10"
             android:hint="@string/last_name"
+            android:importantForAutofill="no"
             android:inputType="textPersonName"
-            android:padding="15dp"
-            android:importantForAutofill="no" />
+            android:padding="15dp" />
     </LinearLayout>
 
     <EditText
@@ -114,39 +114,18 @@
         android:padding="15dp"
         android:importantForAutofill="no" />
 
-    <LinearLayout
+    <Button
+        android:id="@+id/post_btnEnter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="10dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/post_btnAddPicture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_weight="3"
-            android:backgroundTint="#424942"
-            android:fontFamily="@font/actor"
-            android:text="@string/add_picture"
-            android:textAllCaps="false"
-            android:textSize="18sp"
-            app:cornerRadius="10dp" />
-
-        <Button
-            android:id="@+id/post_btnEnter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/black"
-            android:fontFamily="@font/actor"
-            android:text="@string/enter"
-            android:textAllCaps="false"
-            android:textSize="18sp"
-            app:cornerRadius="10dp" />
-    </LinearLayout>
+        android:backgroundTint="@color/black"
+        android:fontFamily="@font/actor"
+        android:text="@string/enter"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:cornerRadius="10dp" />
 
 </LinearLayout>

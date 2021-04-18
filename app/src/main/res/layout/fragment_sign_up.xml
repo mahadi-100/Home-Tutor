@@ -69,6 +69,7 @@
         android:fontFamily="@font/actor"
         android:padding="10dp"
         android:text="@string/sign_up"
+        android:textAllCaps="false"
         android:textSize="18sp"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
