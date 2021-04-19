@@ -11,10 +11,10 @@ public class InfoClass {
     private final String address;
     private final String about;
 
-    private final Uri imageUri;
+    private final String imageUri;
 
     public InfoClass(String name, String age, String graduate, String education,
-                     String phone, String address, String about, Uri imageUri) {
+                     String phone, String address, String about, String imageUri) {
         this.name = name;
         this.age = age;
         this.graduate = graduate;
@@ -53,7 +53,7 @@ public class InfoClass {
         return about;
     }
 
-    public Uri getImageUri() {
+    public String getImageUri() {
         return imageUri;
     }
 }

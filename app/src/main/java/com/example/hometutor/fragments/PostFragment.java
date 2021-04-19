@@ -109,7 +109,7 @@ public class PostFragment extends Fragment {
         DatabaseReference infoReference = database.getReference("Information").
                 child(Objects.requireNonNull(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail()).substring(0,10));
 
-        infoReference.setValue(new InfoClass(name, age, graduate, education, phone, address, about, imageUri));
+        infoReference.setValue(new InfoClass(name, age, graduate, education, phone, address, about, imageUri.toString()));
 
         uploadPicture(imageUri);
     }
